@@ -17,14 +17,14 @@ Ce POC démontre la faisabilité technique des choix architecturaux retenus pour
 
 ## Stack technique
 
-| Couche | Technologie |
-|---|---|
-| Backend | Spring Boot 3 (Java 21) |
-| Frontend | Angular 17 |
-| Base de données | PostgreSQL 16 (Docker) |
+| Couche | Technologie              |
+|---|--------------------------|
+| Backend | Spring Boot 3 (Java 21)  |
+| Frontend | Angular 21               |
+| Base de données | PostgreSQL 16 (Docker)   |
 | Temps réel | Spring WebSocket (STOMP) |
-| Authentification | JWT + Spring Security |
-| Migrations BDD | Flyway |
+| Authentification | JWT + Spring Security    |
+| Migrations BDD | Flyway                   |
 
 ---
 

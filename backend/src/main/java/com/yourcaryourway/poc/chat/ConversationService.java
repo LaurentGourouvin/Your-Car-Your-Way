@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -52,8 +53,14 @@ public class ConversationService {
      *
      * @return a list of {@link ConversationResponse} with status WAITING
      */
+//    public List<ConversationResponse> getQueue() {
+//        return conversationQueueService.getAll()
+//                .stream()
+//                .map(this::toConversationResponse)
+//                .toList();
+//    }
     public List<ConversationResponse> getQueue() {
-        return conversationQueueService.getAll()
+        return conversationRepository.findByStatus(ConversationStatus.WAITING)
                 .stream()
                 .map(this::toConversationResponse)
                 .toList();
@@ -148,6 +155,13 @@ public class ConversationService {
     public Conversation getConversation(UUID conversationId) {
         return conversationRepository.findById(conversationId)
                 .orElseThrow(() -> new RuntimeException("Conversation not found."));
+    }
+
+    public Optional<ConversationResponse> getActiveConversation(User agent) {
+        return conversationRepository.findByAgentAndStatus(agent, ConversationStatus.IN_PROGRESS)
+                .stream()
+                .findFirst()
+                .map(this::toConversationResponse);
     }
 
     /**

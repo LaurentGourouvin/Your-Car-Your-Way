@@ -8,6 +8,7 @@ import com.yourcaryourway.poc.model.Conversation;
 import com.yourcaryourway.poc.model.User;
 import com.yourcaryourway.poc.repository.ChatMessageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,9 +38,10 @@ public class ChatWebSocketController {
      * @param principal the authenticated user sending the message
      */
     @MessageMapping("/chat/{conversationId}")
-    public void sendMessage(UUID conversationId, SendMessageRequest request, Principal principal) {
+    public void sendMessage(@DestinationVariable String conversationId, SendMessageRequest request, Principal principal) {
+        UUID id = UUID.fromString(conversationId);
         User user = (User) ((UsernamePasswordAuthenticationToken) principal).getPrincipal();
-        Conversation conversation = conversationService.getConversation(conversationId);
+        Conversation conversation = conversationService.getConversation(id);
 
         ChatMessage message = new ChatMessage();
         message.setConversation(conversation);
@@ -57,7 +59,8 @@ public class ChatWebSocketController {
                         message.getContent(),
                         message.getSentAt()
                 )
-        );    }
+        );
+    }
 
     /**
      * Checks whether a user has the SUPPORT role.

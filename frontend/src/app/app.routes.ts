@@ -7,7 +7,7 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/auth/login/login.component').then((r) => r.LoginComponent),
   },
-  /*{
+  {
     path: 'chat',
     loadComponent: () =>
       import('./features/chat/conversation/conversation.component').then(
@@ -18,5 +18,5 @@ export const routes: Routes = [
     path: 'queue',
     loadComponent: () =>
       import('./features/chat/queue/queue.component').then((r) => r.QueueComponent),
-  },*/
+  },
 ];

@@ -1,0 +1,96 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <h1 class="text-2xl font-bold mb-6 text-center">Your Car Your Way</h1>
+    <h2 class="text-lg mb-6 text-center text-gray-600">Créer un compte</h2>
+
+    @if (error()) {
+      <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+        {{ error() }}
+      </div>
+    }
+
+    <div class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Prénom <span class="text-red-500">*</span></label>
+        <input
+          type="text"
+          [value]="firstName()"
+          (input)="firstName.set($any($event.target).value)"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Jean"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Nom <span class="text-red-500">*</span></label>
+        <input
+          type="text"
+          [value]="lastName()"
+          (input)="lastName.set($any($event.target).value)"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Dupont"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
+        <input
+          type="email"
+          [value]="email()"
+          (input)="email.set($any($event.target).value)"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="email@example.com"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Mot de passe <span class="text-red-500">*</span></label>
+        <input
+          type="password"
+          [value]="password()"
+          (input)="password.set($any($event.target).value)"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="••••••••"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Date de naissance</label>
+        <input
+          type="date"
+          [value]="birthDate()"
+          (input)="birthDate.set($any($event.target).value)"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Adresse</label>
+        <input
+          type="text"
+          [value]="address()"
+          (input)="address.set($any($event.target).value)"
+          class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="12 rue de la Paix, Paris"
+        />
+      </div>
+
+      <button
+        (click)="onSubmit()"
+        [disabled]="isLoading()"
+        class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+      >
+        @if (isLoading()) {
+          Création en cours...
+        } @else {
+          Créer mon compte
+        }
+      </button>
+
+      <p class="text-center text-sm text-gray-600">
+        Déjà un compte ?
+        <a routerLink="/login" class="text-blue-600 hover:underline">Se connecter</a>
+      </p>
+    </div>
+  </div>
+</div>

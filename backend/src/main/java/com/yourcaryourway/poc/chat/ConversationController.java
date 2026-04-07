@@ -79,4 +79,11 @@ public class ConversationController {
     public ResponseEntity<List<MessageResponse>> getMessages(@PathVariable UUID id) {
         return ResponseEntity.ok(conversationService.getMessages(id));
     }
+
+    @GetMapping("/active")
+    public ResponseEntity<ConversationResponse> getActiveConversation(@AuthenticationPrincipal User agent) {
+        return conversationService.getActiveConversation(agent)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.noContent().build());
+    }
 }

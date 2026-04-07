@@ -27,4 +27,8 @@ export class ChatService {
   getMessages(id: string) {
     return this.http.get<MessageResponse[]>(`${this.API_URL}/${id}/messages`);
   }
+
+  getActiveConversation() {
+    return this.http.get<ConversationResponse>(`${this.API_URL}/active`);
+  }
 }

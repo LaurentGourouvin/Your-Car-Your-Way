@@ -16,7 +16,7 @@ export class WebSocketService {
   messages$ = this.messageSubject.asObservable();
   queueUpdates$ = this.queueSubject.asObservable();
 
-  connect() {
+  connect(onConnected?: () => void) {
     this.client = new Client({
       webSocketFactory: () => new SockJS('http://localhost:8080/ws'),
       connectHeaders: {
@@ -24,6 +24,7 @@ export class WebSocketService {
       },
       onConnect: () => {
         console.log('WebSocket connected');
+        onConnected?.();
       },
       onDisconnect: () => {
         console.log('WebSocket disconnected');

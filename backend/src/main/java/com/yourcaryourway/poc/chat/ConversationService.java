@@ -139,6 +139,18 @@ public class ConversationService {
     }
 
     /**
+     * Retrieves a conversation by its ID.
+     *
+     * @param conversationId the ID of the conversation to retrieve
+     * @return the {@link Conversation} entity
+     * @throws RuntimeException if the conversation is not found
+     */
+    public Conversation getConversation(UUID conversationId) {
+        return conversationRepository.findById(conversationId)
+                .orElseThrow(() -> new RuntimeException("Conversation not found."));
+    }
+
+    /**
      * Converts a {@link Conversation} entity to a {@link ConversationResponse} DTO.
      *
      * @param conversation the conversation entity to convert
